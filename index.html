@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Mapeo de Procesos Automatizables</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            background-color: #e9f7e9;
+            padding: 15px;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Simulador de Mapeo de Procesos Automatizables</h1>
+        <p>Introduce tus tareas repetitivas y descubre cómo priorizar su automatización.</p>
+        <form id="processForm">
+            <label for="tasks">Describe una tarea repetitiva:</label>
+            <input type="text" id="tasks" placeholder="Ejemplo: Enviar correos de bienvenida">
+            
+            <label for="timeSpent">Tiempo promedio semanal en esta tarea (en horas):</label>
+            <input type="number" id="timeSpent" placeholder="Ejemplo: 5" required>
+            
+            <button type="button" onclick="mapProcesses()">Generar Recomendación</button>
+        </form>
+        
+        <div id="result" class="result" style="display: none;">
+            <h2>Recomendación</h2>
+            <p id="recommendationText"></p>
+        </div>
+    </div>
+    
+    <script>
+        function mapProcesses() {
+            const task = document.getElementById("tasks").value;
+            const timeSpent = parseFloat(document.getElementById("timeSpent").value);
+            
+            let recommendation;
+            
+            if (timeSpent > 3) {
+                recommendation = `
+                    La tarea "${task}" consume mucho tiempo. Te recomendamos automatizarla usando herramientas como Zapier o Mailchimp.
+                `;
+            } else {
+                recommendation = `
+                    La tarea "${task}" podría automatizarse si se repite con alta frecuencia. Considera usar una herramienta simple de automatización.
+                `;
+            }
+            
+            document.getElementById("recommendationText").innerText = recommendation;
+            document.getElementById("result").style.display = "block";
+        }
+    </script>
+</body>
+</html>
